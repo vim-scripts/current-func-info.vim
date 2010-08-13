@@ -1,0 +1,38 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3197
+
+Supported languages: C, Perl, Ruby, Python, PHP, Vim script
+Repository: http://github.com/tyru/current-func-info.vim
+
+
+current-func-info shows current function's name to statusline, tabline,
+anywhere.
+|cfi#get_func_name()| to get function's name.
+
+
+cfi#load()				*cfi#load()*
+	Load "autoload/cfi.vim" and "plugin/cfi.vim".
+
+cfi#get_func_name([{filetype}])				*cfi#get_func_name()*
+	Returns function's name.
+	If {filetype} is omitted, current 'filetype' is used instead.
+	Include this expression to |'statusline'| or |'tabline'| and so on.
+
+cfi#format({fmt}, {default})			*cfi#format()*
+	Returns formatted string. >
+    let &statusline = '%{cfi#format("[%s()]", "no function")}'
+<	This returns "no function" if cfi#get_func_name() returns empty string.
+	Or returns "[func()]" if cfi#get_func_name() returns "func".
+
+cfi#create_finder({filetype})				*cfi#create_finder()*
+	Returns Dictionary of instance for finder.
+
+	To create finder, implement |s:finder.find()| or
+	implement |s:finder.get_func_name()|, |s:finder.find_begin()|,
+	|s:finder.find_end()|.
+
+	(TODO: Write more descriptions)
+
+	See ftplugin/*.vim for the details.
+
+cfi#supported_filetype({filetype})				*cfi#supported_filetype()*
+	Return boolean value if {filetype} is supported.
