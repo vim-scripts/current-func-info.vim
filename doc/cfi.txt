@@ -2,7 +2,7 @@
 
 Author:
   tyru <tyru.exe@gmail.com>
-Version: 0.0.1
+Version: 0.0.2
 License:
 " NEW BSD LICENSE {{{
 "   Copyright (c) 2009, tyru
@@ -42,9 +42,15 @@ FUNCTIONS					*cfi-functions* {{{
 cfi#load()				*cfi#load()*
 	Load "autoload/cfi.vim" and "plugin/cfi.vim".
 
-cfi#get_func_name()				*cfi#get_func_name()*
+cfi#get_func_name([{filetype}])				*cfi#get_func_name()*
 	Returns function's name.
 	Include this expression to |'statusline'| or |'tabline'| and so on.
+
+cfi#format({fmt},{default})			*cfi#format()*
+	Returns formatted string. >
+    let &statusline = '%{cfi#format("[%s()]", "no function")}'
+<	This returns "no function" if cfi#get_func_name() returns empty string.
+	Or returns "[func()]" if cfi#get_func_name() returns "func".
 
 cfi#create_finder({filetype})				*cfi#create_finder()*
 	Returns Dictionary of instance for finder.
@@ -69,6 +75,9 @@ CHANGELOG						*cfi-changelog* {{{
 - Initial upload
 0.0.1:
 - Fix bug: couldn't get the name of last function in a file.
+0.0.2:
+- Implement cfi#format()
+- Implement Python support
 
 }}}
 ==============================================================================
