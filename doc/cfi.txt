@@ -2,7 +2,7 @@
 
 Author:
   tyru <tyru.exe@gmail.com>
-Version: 0.0.4
+Version: 0.0.5
 License:
 " NEW BSD LICENSE {{{
 "   Copyright (c) 2009, tyru
@@ -23,6 +23,7 @@ CONTENTS						*cfi-contents*
 Introduction		|cfi-introduction|
 Interface			|cfi-interface|
   Functions			|cfi-functions|
+  Variables			|cfi-variables|
 Changelog			|cfi-changelog|
 
 
@@ -32,6 +33,7 @@ INTRODUCTION						*cfi-introduction* {{{
 current-func-info shows current function's name to statusline, tabline,
 anywhere.
 |cfi#get_func_name()| to get function's name.
+
 }}}
 ==============================================================================
 INTERFACE				*cfi-interface* {{{
@@ -44,6 +46,7 @@ cfi#load()				*cfi#load()*
 
 cfi#get_func_name([{filetype}])				*cfi#get_func_name()*
 	Returns function's name.
+	If {filetype} is omitted, current 'filetype' is used instead.
 	Include this expression to |'statusline'| or |'tabline'| and so on.
 
 cfi#format({fmt}, {default})			*cfi#format()*
@@ -67,6 +70,27 @@ cfi#supported_filetype({filetype})				*cfi#supported_filetype()*
 	Return boolean value if {filetype} is supported.
 
 }}}
+------------------------------------------------------------------------------
+VARIABLES					*cfi-variables* {{{
+
+All
+------
+
+g:cfi_disable					*g:cfi_disable*
+	Disable all features and ftplugins.
+
+g:loaded_cfi_ftplugin_{lang}	*g:loaded_cfi_ftplugin*
+	Disable the load of ftplugin/{lang}/cfi.vim
+
+
+PHP
+------
+
+g:cfi_php_show_params			*g:cfi_php_show_params*
+							(Default: 0)
+	Include arguments to |cfi#get_func_name()|'s return value.
+
+}}}
 }}}
 ==============================================================================
 CHANGELOG						*cfi-changelog* {{{
@@ -82,6 +106,9 @@ CHANGELOG						*cfi-changelog* {{{
 - Fix bug: Ruby ftplugin did not work.
 0.0.4:
 - Include PHP support. Thanks Chris Ruzin.
+0.0.5:
+- Fix the flickering of c ftplugin
+- Add variables g:cfi_disable, g:loaded_cfi_ftplugin_{lang}.
 
 }}}
 ==============================================================================

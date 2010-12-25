@@ -4,10 +4,10 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-if exists('s:loaded') && s:loaded
+if exists('g:cfi_disable') || exists('g:loaded_cfi_ftplugin_c')
     finish
 endif
-let s:loaded = 1
+let g:loaded_cfi_ftplugin_c = 1
 
 
 
@@ -48,7 +48,12 @@ endfunction "}}}
 function! s:finder.find_begin() "{{{
     let NONE = 0
     let [orig_lnum, orig_col] = [line('.'), col('.')]
+
+    let vb = &vb
+    setlocal vb t_vb=
     normal! [m
+    let &vb = vb
+
     if line('.') == orig_lnum && col('.') == orig_col
         return NONE
     endif
@@ -59,7 +64,12 @@ endfunction "}}}
 function! s:finder.find_end() "{{{
     let NONE = 0
     let [orig_lnum, orig_col] = [line('.'), col('.')]
+
+    let vb = &vb
+    setlocal vb t_vb=
     normal! ]M
+    let &vb = vb
+
     if line('.') == orig_lnum && col('.') == orig_col
         return NONE
     endif
